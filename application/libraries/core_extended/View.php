@@ -48,6 +48,7 @@ class View
         $this->getMeta();
         $this->parser = new Parser();
         $this->ion_auth=new Ion_auth();
+        // $this->session=$controller->session();
     }
 
     /**

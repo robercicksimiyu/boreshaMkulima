@@ -31,6 +31,7 @@ class ExtendedController extends CI_Controller
         $this->ion_auth=new Ion_auth($this);
         $this->load->library('form_validation');
         $this->load->helper('url');
+        $this->load->library('session');
 
         
     }

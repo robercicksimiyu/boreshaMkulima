@@ -8,12 +8,13 @@
 
 </style>
 <div role="main" class="page page--primary category-javascript">
+  <a href="/boreshaMkulima/accounts/create_account"><button>Create Account</button></a>
 <div class="article-list">
     <div class="article-list_item article-list" data-offset="2">
         <form class="span3" action="/boreshaMkulima/accounts/login" method="post">
       <?php 
       if(isset($message)){
-        echo "<i class='alert alert-error'>{$message}</i>";
+        echo "<i class=''>{$message}</i>";
       }        
       ?>
             <h1>Login</h1> 
@@ -21,11 +22,14 @@
             <input name="<?php echo $identity['name'];?>" type="<?php echo $identity['type'];?>" value="<?php echo $identity['value'];?>">
             <input name="<?php echo $password['name'];?>" type="<?php echo $password['type'];?>" width="400">
       
-      Remember me: <input type="checkbox" name="remember" value="1" id="remember">     
+            Remember me: <input type="checkbox" name="remember" value="1" id="remember">     
             <button >Login</button>
-
+            <a href="/boreshaMkulima/forgot_password"></br>
+              Forgot Password ?</a>
         </form>
+
     </div>
+
 
 <li class="article-list_item article-list_item--featured featured tile post-tile" data-block="1" data-offset="">
   <article class="article article--micro category-design article--micro-featured" data-disqus-id="http://www.sitepoint.com/6-common-mistakes-logo-design/">

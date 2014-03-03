@@ -14,7 +14,8 @@
 		<form class="" action="/boreshaMkulima/accounts/create_account" method="post">
       <?php 
       if(isset($message)){
-        echo "<i class='alert alert-error'>{$message}</i>";
+        echo "<i class='alert-error'>{$message}</i>";
+        // var_dump($message);
       }        
       ?>
 			<h2>Create Account</h2> 

@@ -27,6 +27,9 @@ class Accounts extends ExtendedController
 	
 	public function __construct(){
 		parent::__construct();
+		$this->form_validation->set_error_delimiters($this->config->item('error_start_delimiter', 'ion_auth'), $this->config->item('error_end_delimiter', 'ion_auth'));
+
+
 	}
 
 	function index(){
@@ -93,7 +96,7 @@ class Accounts extends ExtendedController
 			$reg=$this->ion_auth->register($this->input->post('username'),$this->input->post('password'),
 												$this->input->post('identity'),$this->input->post('phone'),$group);
 			if($reg){
-				exit();
+				redirect('discussion');
 
 			}else{
 				$username=array(
@@ -125,7 +128,7 @@ class Accounts extends ExtendedController
 					'name'=>'c_password',
 					'type'=>'password');
 
-				$message="Sorry, registration failed";
+				$message=$this->ion_auth->errors();
 
 			}
 		}
@@ -237,11 +240,17 @@ class Accounts extends ExtendedController
 		redirect('accounts','refresh');
 	}
 
+	
 
 
 	function activate(){
 
 	}
+
+	function profile_setup(){
+
+	}
+
 
 	function deactivate(){
 

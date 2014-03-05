@@ -78,7 +78,7 @@
           <?php if($this->ion_auth->logged_in()):?>
           
           <li class="has-dropdown">
-            <a href=""><img alt="" style="radius:100%" src="<?php echo P_PIC.'/'.$this->controller->session->userdata('gravator');?>" class="" height="45" width="45"><?php echo $this->controller->session->userdata('username');?></a>
+            <a href=""><img alt="" style="border-radius:88%" src="<?php echo P_PIC.'/'.$this->controller->session->userdata('gravator');?>" class="" height="45" width="45"><?php echo $this->controller->session->userdata('username');?></a>
             <ul class="dropdown" style=""><li class="title back js-generated"><h5><a href="#">« Back</a></h5></li>
               
               <li>

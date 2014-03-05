@@ -512,4 +512,50 @@ class View
         return $this->aLocalMeta;
     }
 
+    // Function for getting time
+
+    function timing($time){
+        // $time=strtotime($time);
+        $diff=time()-$time;
+                
+        return $this->get_timing($diff);
+    }
+
+    
+    function get_timing($ts){
+        $s=0;$m=0;$hr=0;$d=0;$mth=0;$yr=0;$td="just now";
+        // print $ts;
+        
+        if($ts>59){
+            $m=(int)($ts/60);
+            $td="{$m} minutes ago";
+
+            if($m>59){
+                $hr=(int) ($m/60);
+                $td="{$hr} hours ago";
+                if($hr>23){
+                    $d=(int) ($hr/24);
+                    if($d<1){
+                        $td="{$d} day ago";
+                    }else{
+                        $td="{$d} days ago";
+                    }
+                    if($d>29){
+                        $mth=(int)($d/30);
+                        $td="about {$mth} months ago";
+                        if($d>364){
+                            $yr=(int) ($d/365);
+                            $td="about {$yr} years ago";
+                        }
+                    }
+                    
+                }
+            }
+
+        }
+        
+        
+        return $td;
+    }
+
 }

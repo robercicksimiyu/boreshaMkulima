@@ -24,7 +24,7 @@
       
             Remember me: <input type="checkbox" name="remember" value="1" id="remember">     
             <button >Login</button>
-            <a href="/boreshaMkulima/forgot_password"></br>
+            <a href="/boreshaMkulima/accounts/forgot_password"></br>
               Forgot Password ?</a>
         </form>
 

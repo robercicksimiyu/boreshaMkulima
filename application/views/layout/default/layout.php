@@ -77,8 +77,19 @@
           </li>
           <?php if($this->ion_auth->logged_in()):?>
           
-          <li>
-            <a href="/boreshaMkulima/accounts/logout">Logout</a>
+          <li class="has-dropdown">
+            <a href=""><img alt="" style="radius:100%" src="<?php echo P_PIC.'/'.$this->controller->session->userdata('gravator');?>" class="" height="45" width="45"><?php echo $this->controller->session->userdata('username');?></a>
+            <ul class="dropdown" style=""><li class="title back js-generated"><h5><a href="#">« Back</a></h5></li>
+              
+              <li>
+                <a class="category-ux menuitem" href="/boreshaMkulima/accounts/account_settings">Account Settings</a>
+              </li>
+              <li>
+                <a class="category-ux menuitem" href="/boreshaMkulima/accounts/logout">Log Out</a>
+              </li>
+             
+                            
+            </ul>
           </li>
         <?php else:?>
           <li class="top-bar_search">
@@ -106,15 +117,21 @@
 <script src="<?echo JS;?>widgets.js"></script>
 
 <script>
-    var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
-    (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
-        g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
-        s.parentNode.insertBefore(g,s)}(document,'script'));
+    // var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
+    // (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+    //     g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+    //     s.parentNode.insertBefore(g,s)}(document,'script'));
+(function(){
+    $('.placeholder').on('click',function(){
+      console.log("message");
+      $('.textarea').show();
+    });
+  }());
     
 </script>
 
 </body>
-<footer class="site-footer" role="contentinfo">
+<footer class="site-footer" role="contentinfo" style="margin-top:px;">
        <div class="row"> 
 
         <ul class="footer-links">

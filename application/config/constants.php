@@ -42,6 +42,7 @@
     define('CSS',PUBLIC_FOLDER.'css/');
     define('JS',PUBLIC_FOLDER.'js/');
     define('IMG',PUBLIC_FOLDER.'img/');
+    define('P_PIC',PUBLIC_FOLDER.'img/account_pics');
 
 
 /* End of file constants.php */

@@ -29,10 +29,13 @@ class Accounts extends ExtendedController
 		parent::__construct();
 		$this->form_validation->set_error_delimiters($this->config->item('error_start_delimiter', 'ion_auth'), $this->config->item('error_end_delimiter', 'ion_auth'));
 
+		$this->load->model('accounts_model','',true);
+
 
 	}
 
 	function index(){
+		// $message=$this->accounts_model->profile($this->session->userdata('user_id'));
 		$this->form_validation->set_rules('identity', 'Identity', 'trim|required');
 		$this->form_validation->set_rules('password', 'Password', 'trim|required');
 
@@ -54,7 +57,7 @@ class Accounts extends ExtendedController
 					'name'=>'password',
 					'type'=>'password',
 					);
-				$this->message="sorry, please insert the right information";
+				$this->message=$this->ion_auth->messages();
 			}			
 		}
 		else{
@@ -188,7 +191,7 @@ class Accounts extends ExtendedController
 			$remember=(bool)$this->input->post('remember');
 
 			if($this->ion_auth->login($identity,$password,$remember)){
-				redirect('discussion');
+				redirect('discussion','refresh');
 			} else{
 				$identity=array(
 					'name'=>'identity',
@@ -240,34 +243,149 @@ class Accounts extends ExtendedController
 		redirect('accounts','refresh');
 	}
 
-	
 
-
-	function activate(){
-
-	}
 
 	function profile_setup(){
+		$message=null;
+		if(!($this->ion_auth->logged_in())){
+			redirect('accounts','refresh');
+		}
+
+		$update=$this->ion_auth->update($this->session->userdata('user_id'),array(
+			'first_name'=>$this->input->post('first_name'),
+			'last_name'=>$this->input->post('last_name'),
+			'location'=>$this->input->post('phone'),
+			'interests'=>$this->input->post('intrests'),
+			'phone'=>$this->input->post('phone')
+			));
+
+		if($update){
+			$message="There was a problem updating profile";
+		}
+		else{
+			redirect('account','refresh');
+
+		}
+
+		$this->view->render(array());
+		// print_r($this->session->all_userdata());
+
+	}
+
+	function account_settings(){
+		$profile_data=$this->accounts_model->profile($this->session->userdata('user_id'));
+		$this->view->render(array(
+			'profile_data'=>$profile_data));
+	}
+
+	function upload_profile_picture(){
 
 	}
 
 
-	function deactivate(){
-
-	}
+	
 
 	function edit_user(){
-
+		// print_r($this->uri->uri_to_assoc(3));
+		// var_dump();
+		// print_r($this->session->all_userdata());
 	}
 
 	function forgot_password(){
+		$message="null";
+
+		$email=array(
+			'name'=>"email",
+			'type'=>"email",
+			'id'=>"email",
+			'placeholder'=>'Email Address'
+			);
+
+		$this->form_validation->set_rules('email','Email Address','required|valid_email');
+
+		if($this->form_validation->run()==false){
+			$message=validation_errors();
+		}
+		else{
+			$forgotten = $this->ion_auth->forgotten_password($this->input->post('email'));
+
+			if($forgotten){
+				redirect('accounts','refresh');
+			}
+			else{
+				$message="Sorry, no account found with this email</p>";
+			}
+		}
+
+		
+
+		$this->view->render(
+			array(
+				'email'=>$email,
+				'message'=>$message));
 
 	}
 
-	function reset_password(){
+	/*function reset_password($code=NULL){
+		$message=null;
+		if(!$code){
+			show_404();
+		}
+
+		$user=$this->ion_auth->forgotten_password_check($code);
+
+		if($user){
+			//if code is valid check validation code
+			$this->form_validation->set_rules('new','New Password','required|min_legnth[6]|max_length[32]|matches[new_confirm]');
+
+			$this->form_validation->set_rules('new_confirm','Confrim Password','required');
+
+			if($this->form_validation->run()==false){
+				// display the form
+				$new=array(
+					'name'=>'new',
+					'type'=>'password',
+					'id'='new',
+					'placeholder'="Enter your new password"
+					);
+
+				$new_confirm=array(
+					'name'=>'new_confirm',
+					'type'=>'password',
+					'id'='new',
+					'placeholder'="Confirm passowrd"
+					);
+
+				$user_id=array(
+					'name'=>'user_id',
+					'id'=>'used_id',
+					'type'=>'hidden',
+					'value'=>$user->id()
+					);
+
+				$csrf= $this->_get_csrf_nonce();
+				$code = $code;
+
+				// render the form
+
+				$this->view->render(array(
+					'new'=>$new,
+					'new_confrom'=>$new_confrom,
+					'user_id'=>$user_id,
+					'csrf'=>$csrf,
+					'code'=>$code));
+			}
+
+			else{
+				//Having a valid request?
+				if($this->_valid)
+			}
+		}
+
+
 
 	}
-
+*/
 	function show_profile(){
 
 	}
@@ -279,4 +397,65 @@ class Accounts extends ExtendedController
 	function verification(){
 
 	}
+
+	public function change_password(){
+		$message=null;
+		$this->form_validation->set_rules('old','Old Password','required');
+		$this->form_validation->set_rules('new','New Password','required|min_legnth[8]|max_length[22]|matches[new_confirm]');
+		$this->form_validation->set_rules('new_confirm','Confirm new Password','required');
+
+		if(!$this->ion_auth->logged_in()){
+			redirect('accounts','refresh');
+		}
+		
+		if($this->form_validation->run()==false){
+			// $message=(validation_errors())?validation_errors():"There was a problem changing password";
+			$message=validation_errors();
+		}
+		else{
+			$identity=$this->session->userdata('email');
+			$change=$this->ion_auth->change_password($identity,
+											$this->input->post('old'),
+											$this->input->post('new'));
+
+			if($change){
+				$message=$this->ion_auth->messages();
+				$this->logout();
+			}else{
+				redirect('accounts','refresh');
+			}
+			
+		}
+
+		$old=array(
+			'type'=>'password',
+			'name'=>'old',
+			'id'=>'old',
+			'placeholder'=>'Current Password'
+			);
+
+		$new=array(
+			'type'=>'password',
+			'name'=>'new',
+			'id'=>'new',
+			'placeholder'=>'New Password'
+			);
+
+		$confirm=array(
+			'type'=>'password',
+			'name'=>'new_confirm',
+			'id'=>'new_confirm',
+			'placeholder'=>'Confrim Password'
+			);
+
+		$this->view->render(array(
+			'old'=>$old,
+			'new'=>$new,
+			'confirm'=>$confirm,
+			'message'=>$message
+			)
+		);
+	}
+
+
 }

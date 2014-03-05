@@ -138,11 +138,17 @@ Sort by Best
 
 </div>
 
-<div class="textarea-wrapper" data-role="textarea" dir="auto"><div><span class="placeholder">Join the discussion…</span><div aria-label="Join the discussion…" style="overflow: auto; max-height: 350px;" data-role="editable" aria-multiline="true" role="textbox" tabindex="-1" class="textarea" contenteditable="true"><p><br></p></div><div style="display: none;"><ul class="suggestions">
-<li class="header">
-<h5>in this conversation</h5>
-</li>
-</ul></div></div>
+<div class="textarea-wrapper" data-role="textarea" draggable="true" dir="auto">
+<div><span class="placeholder" placeholder="join in the conversation"></span>
+	<div aria-label="Join the discussion…" style="overflow: auto; max-height: 350px;" data-role="editable" aria-multiline="true" role="textbox" tabindex="-1" class="textarea" contenteditable="true"><p><br></p></div>
+	<div style="display: none;">
+	<ul class="suggestions">
+		<li class="header">
+			<h5>in this conversation</h5>
+		</li>
+	</ul>
+	</div>
+</div>
 <div data-role="drag-drop-placeholder" class="media-drag-hover" style="display: none">
 <div class="drag-text">
 ⬇ Drag and drop your images here to upload them.
@@ -157,6 +163,7 @@ Sort by Best
 
 
 </div>
+
 </div>
 
 <section data-role="auth-or-ident" class="auth-section logged-out">
@@ -257,7 +264,7 @@ or register with Disqus
 
 <div class="avatar hovercard">
 <a href="http://disqus.com/manchuck/" class="user" data-action="profile" data-user="93945838">
-<img data-role="user-avatar" data-user="93945838" src="a_data/noavatar92.png" alt="Avatar">
+<img data-role="user-avatar" data-user="93945838" src="<?php echo IMG;?>svg/book.svg" alt="Avatar">
 </a>
 </div>
 
@@ -4273,3 +4280,6 @@ some discussions!</p>
 </ul>
 </div>
 </div>
+<script type="text/javascript">
+	
+</script>

@@ -75,7 +75,14 @@
           <li class="">
             <a href="http://www.sitepoint.com/newsletter" tabindex="3">Subscribe</a>
           </li>
-          <?php if($this->ion_auth->logged_in()):?>
+          
+          <?php if($this->controller->ion_auth->logged_in()):?>
+          <li class="top-bar_search">
+            <form method="get" action="http://www.sitepoint.com/">
+              <input autocomplete="off" class="searchquery" id="search-box" name="s" placeholder="Search…" tabindex="4" type="text">
+              <button tabindex="-1"></button>
+            </form>
+          </li>
           
           <li class="has-dropdown">
             <a href=""><img alt="" style="border-radius:88%" src="<?php echo P_PIC.'/'.$this->controller->session->userdata('gravator');?>" class="" height="45" width="45"><?php echo $this->controller->session->userdata('username');?></a>
@@ -92,11 +99,8 @@
             </ul>
           </li>
         <?php else:?>
-          <li class="top-bar_search">
-            <form method="get" action="http://www.sitepoint.com/">
-              <input autocomplete="off" class="searchquery" id="search-box" name="s" placeholder="Search…" tabindex="4" type="text">
-              <button tabindex="-1"></button>
-            </form>
+          <li class='create_account'>
+            <a href="#" class="category-ux menuitem" >Create Account</a>
           </li>
         <?php endif;?>
         </ul>
@@ -112,7 +116,7 @@
 
 <script src="<?echo JS;?>vendor/bootstrap.min.js"></script>
 
-<script src="<?echo JS;?>plugins.js"></script>
+<!--<script src="<?echo JS;?>plugins.js"></script>-->
 <script src="<?echo JS;?>me.js"></script>
 <script src="<?echo JS;?>widgets.js"></script>
 

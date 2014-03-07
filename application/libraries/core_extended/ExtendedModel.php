@@ -14,5 +14,6 @@
         public function __construct()
         {
             parent::__construct();
+            $this->ion_auth=new Ion_auth($this);
         }
     }

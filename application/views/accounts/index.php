@@ -8,7 +8,7 @@
 
 </style>
 <div role="main" class="page page--primary category-javascript">
-  <a href="/boreshaMkulima/accounts/create_account"><button>Create Account</button></a>
+
 <div class="article-list">
     <div class="article-list_item article-list" data-offset="2">
         <form class="span3" action="/boreshaMkulima/accounts/login" method="post">

@@ -5133,7 +5133,7 @@ a.thumbnail:focus {
   font-size: 12px;
   color: #ffffff;
   text-align: center;
-  background-color: #428bca;
+  background-color: #ffcc33;
   -webkit-box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.15);
           box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.15);
   -webkit-transition: width 0.6s ease;
@@ -5288,7 +5288,7 @@ a.list-group-item:focus {
 .list-group-item.active:focus {
   z-index: 2;
   color: #ffffff;
-  background-color: #428bca;
+  background-color: #339933;
   border-color: #428bca;
 }
 
@@ -5301,7 +5301,7 @@ a.list-group-item:focus {
 .list-group-item.active .list-group-item-text,
 .list-group-item.active:hover .list-group-item-text,
 .list-group-item.active:focus .list-group-item-text {
-  color: #e1edf7;
+  color: #fff;
 }
 
 .list-group-item-heading {
@@ -5539,8 +5539,6 @@ a.list-group-item:focus {
   min-height: 20px;
   padding: 19px;
   margin-bottom: 20px;
-  background-color: #f5f5f5;
-  border: 1px solid #e3e3e3;
   border-radius: 4px;
   -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
           box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
@@ -5994,12 +5992,14 @@ body.modal-open,
 
 .carousel {
   position: relative;
+  margin-bottom: 60px;
+  margin-top: 300px;
 }
 
 .carousel-inner {
   position: relative;
   width: 100%;
-  overflow: hidden;
+  /*overflow: hidden;*/
 }
 
 .carousel-inner > .item {

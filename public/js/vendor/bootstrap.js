@@ -1487,7 +1487,7 @@ if (!jQuery) { throw new Error("Bootstrap requires jQuery") }
     this.init('popover', element, options)
   }
 
-  if (!$.fn.tooltip) throw new Error('Popover requires tooltip.js')
+  if (!$.fn.tooltip) throw new Error('Popover%20requires%20tooltip.html')
 
   Popover.DEFAULTS = $.extend({} , $.fn.tooltip.Constructor.DEFAULTS, {
     placement: 'right'

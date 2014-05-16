@@ -25,6 +25,9 @@
 
     <script src="<?echo JS;?>vendor/jquery-1.10.1.min.js"></script>
     <script src="<?echo JS;?>vendor/bootstrap.js"></script>
+
+    <script src="<?echo JS;?>snap.svg-min.js"></script>
+    <script src="<?echo JS;?>hover.js"></script>
 </head>
 <style>
   body{
@@ -34,8 +37,6 @@
     -o-background-size: cover;
     background-size: cover;
   }
-
-  
   
 </style>
 
@@ -59,22 +60,22 @@
     <section class="top-bar-section" style="left: 0%;">
         <ul class="right">
           <li class="has-dropdown">
-            <a href="<?echo base_url();?>" tabindex="-1">Topics</a>
+            <a href="<?echo base_url();?>#articles" tabindex="-1">Topics</a>
             <ul class="dropdown"><li class="title back js-generated"><h5><a href="#">« Back</a></h5></li>
               <li>
-                <a class="menuitem" href="<?=base_url('category/climate')?>">Climate</a>
+                <a class="menuitem" href="<?=base_url('category/climate')?>#articles">Climate</a>
               </li>
               <li>
-                <a class="menuitem" href="<?=base_url('category/pestsanddiseases')?>">Pests and Diseases</a>
+                <a class="menuitem" href="<?=base_url('category/pestsanddiseases')?>#articles">Pests and Diseases</a>
               </li>
               <li>
-                <a class="menuitem" href="<?=base_url('category/infrustructure')?>">Infrustructure</a>
+                <a class="menuitem" href="<?=base_url('category/infrustructure')?>#articles">Infrustructure</a>
               </li>
               <li>
-                <a class="menuitem" href="<?=base_url('category/technology')?>">Technology</a>
+                <a class="menuitem" href="<?=base_url('category/technology')?>#articles">Technology</a>
               </li>
               <li>
-                <a class="menuitem" href="<?=base_url('category/marketing')?>">Market</a>
+                <a class="menuitem" href="<?=base_url('category/marketing')?>#articles">Market</a>
               </li>
                             
             </ul>
@@ -91,10 +92,10 @@
             <a href="<?php echo base_url('research');?>" tabindex="2">Research</a>
           </li>
           <li class="">
-            <a href="#" tabindex="2">Updates</a>
+            <a href="<?php echo base_url('discussion/search');?>" tabindex="2">Search</a>
           </li>
           <li class="">
-            <a href="http://www.sitepoint.com/newsletter" tabindex="3">Subscribe</a>
+            <a href="<?php echo base_url('discussion/search');?>" tabindex="2">Ask Question</a>
           </li>
           <?php if($this->controller->ion_auth->is_admin()):?>
             <li><a href="<?php echo base_url('admin/dashboard');?>">Admin Panel</li>
@@ -224,16 +225,16 @@ Search.init({
             <h3>About</h3>
           </li>
           <li class="foot-link_item">
-            <a href="http://www.sitepoint.com/about-us/">About us</a>
+            <a href="#">About us</a>
           </li>
           <li class="foot-link_item">
-            <a href="http://www.sitepoint.com/advertising">Advertise</a>
+            <a href="#">Advertise</a>
           </li>
           <li class="foot-link_item">
-            <a href="http://www.sitepoint.com/legals">Legals</a>
+            <a href="#">Legals</a>
           </li>
           <li class="foot-link_item">
-            <a href="mailto:feedback@sitepoint.com">Feedback</a>
+            <a href="mailto:feedback@boreshamkulima.com">Feedback</a>
           </li>
         </ul>
 
@@ -242,16 +243,16 @@ Search.init({
             <h3>Our Sites</h3>
           </li>
           <li class="foot-link_item">
-            <a href="http://www.learnable.com/" target="_blank">Learnable</a>
+            <a href="#" target="_blank">Learnable</a>
           </li>
           <li class="foot-link_item">
-            <a href="http://reference.sitepoint.com/" target="_blank">Reference</a>
+            <a href="#" target="_blank">Reference</a>
           </li>
           <li class="foot-link_item">
-            <a href="http://www.sitepoint.com/hosting-reviews/" target="_blank">Hosting Reviews</a>
+            <a href="#" target="_blank">Hosting Reviews</a>
           </li>
           <li class="foot-link_item">
-            <a href="http://www.sitepoint.com/web-foundations/">Web Foundations</a>
+            <a href="#">Web Foundations</a>
           </li>
         </ul>
 
@@ -260,11 +261,11 @@ Search.init({
             <h3>Connect</h3>
           </li>
           <li class="foot-link_item foot-link_item--icons">
-            <a href="http://www.sitepoint.com/feed"><i class="icon-rss icon-blocks icon-blocks--rss"></i></a>
-            <a href="http://www.sitepoint.com/newsletter"><i class="icon-envelope-alt icon-blocks icon-blocks--newsletter"></i></a>
-            <a href="https://www.facebook.com/sitepoint" target="_blank"><i class="icon-facebook icon-blocks icon-blocks--facebook"></i></a>
-            <a href="http://twitter.com/sitepointdotcom" target="_blank"><i class="icon-twitter icon-blocks icon-blocks--twitter"></i></a>
-            <a href="https://plus.google.com/+sitepoint" target="_blank"><i class="icon-google-plus icon-blocks icon-blocks--google-plus"></i></a>
+            <a href="#"><i class="icon-rss icon-blocks icon-blocks--rss"></i></a>
+            <a href="#"><i class="icon-envelope-alt icon-blocks icon-blocks--newsletter"></i></a>
+            <a href="#" target="_blank"><i class="icon-facebook icon-blocks icon-blocks--facebook"></i></a>
+            <a href="#" target="_blank"><i class="icon-twitter icon-blocks icon-blocks--twitter"></i></a>
+            <a href="#" target="_blank"><i class="icon-google-plus icon-blocks icon-blocks--google-plus"></i></a>
           </li>
         </ul>
 

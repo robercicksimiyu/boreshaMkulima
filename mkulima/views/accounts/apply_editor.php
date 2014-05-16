@@ -15,8 +15,7 @@
       <?php 
       if(isset($message)){
         echo "<i class='alert-error'>{$message}</i>";
-        // var_dump($message);
-      }        
+      }
       ?>
 			<h2>Editors Application</h2> 
       <select id="category" name="category" class="text">

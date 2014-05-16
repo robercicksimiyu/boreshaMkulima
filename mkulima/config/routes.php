@@ -53,6 +53,7 @@ $route['category/climate']='welcome/index/Climate';
 $route['category/marketing']='welcome/index/Marketing';
 $route['category/pestsanddiseases']='welcome/index/Pests and Diseases';
 $route['category/technology']='welcome/index/Technology';
+$route['subscribe']='welcome/subscribe';
 
 
 

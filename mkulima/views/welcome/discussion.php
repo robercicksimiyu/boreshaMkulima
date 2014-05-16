@@ -7,6 +7,13 @@
   .alert{color: #f00;}
 
 </style>
+<?php if($this->controller->session->flashdata('request_failed')): ?>
+  <div class="alert alert-success fade in">
+          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+          <?=$this->controller->session->flashdata('request_failed')?>
+  </div>
+  
+<?php endif;?>
 <div class="container">
   <div id="myCarousel" class="carousel slide">
         <!-- Indicators -->
@@ -54,7 +61,8 @@
                   <input name="phone" type="text" value="" placeholder="phone number">
                   <input name="password" type="password" placeholder="password">
                   <input name="c_password" type="password" placeholder="Confrim Password">
-                  
+                  <p><?=$captcha_img?></p>
+                  <input name="captcha_code" type="text" placeholder="insert code above">
                      
                   <button id="reg">Register</button>
 

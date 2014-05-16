@@ -1,3 +1,9 @@
+<style type="text/css">
+	.container{
+		background: #fff;
+	}
+
+</style>
 <div id="layout">
 <header id="main-nav">
 
@@ -48,7 +54,9 @@
 		</div>
 		<?php endforeach?>
 	</div> -->
+	<div class="container">
 	<div id="results" class="col-lg-9 col-md-offset-1">
+	</div>
 	</div>
 	<script id="search_results_template" type="text/x-handlebars-template">
 		{{#if this}}

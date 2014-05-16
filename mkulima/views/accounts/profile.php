@@ -1,3 +1,9 @@
+<style type="text/css">
+  .container{
+    background: #fff;
+  }
+</style>
+
 <div class="panel panel-success col-md-9 col-md-offset-2">
   <?php foreach($profile_data as $detail):?>
     <div class="col-md-2">

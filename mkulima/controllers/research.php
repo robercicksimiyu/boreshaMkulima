@@ -3,8 +3,6 @@
 
 class Research extends ExtendedController
 {
-	
-
 	function __construct(){
 		parent::__construct();
 			if(!($this->ion_auth->logged_in())){
@@ -13,12 +11,12 @@ class Research extends ExtendedController
 
 			$this->load->model('research_model','',true);
 	}
-
+	// Home page for reach with research posted
 	function index(){
 		$this->view->render(array(
 			'research'=>$this->research_model->db->get('research')->result()));
 	}
-
+	// Post a new research
 	function research_start(){
 		$message=null;
 		$this->form_validation->set_rules('title','Research Title','trim|required');
@@ -40,17 +38,13 @@ class Research extends ExtendedController
 		$this->view->render(array(
 			'message'=>$message));
 	}
-
-	function discussion(){
-		$this->view->render();
-	}
-
+	//View a give research
 	function view_research($id){
 		$this->view->render(array(
 			'research'=>$this->research_model->db->get_where('research',array('id'=>$id))->result()
 			));
 	}
-
+	// Handling edited research
 	function edit_research($id){
 		$this->form_validation->set_rules('title','Topic','trim|required');
 		$this->form_validation->set_rules('research','Research','trim|required');
@@ -65,20 +59,9 @@ class Research extends ExtendedController
 			'research'=>$this->research_model->db->get_where('research',array('id'=>$id))->result()
 			));
 	}
-
+	// Editor for posting research
 	function postResearch(){
 		$this->view->render();
 
 	}
-
-	function downloadResearch(){
-
-	}
-
-	function uploadResearch(){
-
-	}
-
-	
-	
 }

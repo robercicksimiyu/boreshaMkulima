@@ -20,6 +20,12 @@
   </header>
 
   <section class="panel col-md-9 col-md-offset-2 header-post" data-role="main" data-zone="thread">
+  <?php if($this->controller->session->flashdata('question_success')):?>
+    <div class="alert alert-success fade in">
+            <small type="button" class="close" data-dismiss="alert" aria-hidden="true">×</small>
+            <?=$this->controller->session->flashdata('question_success')?>
+    </div>
+  <?php endif;?>
   <div id="posts">
     <ul id="post-list" class="post-list">
     <?php foreach($questions as $question):?>

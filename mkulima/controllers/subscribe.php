@@ -15,23 +15,4 @@ class Updates extends ExtendedController
 	function index(){
 		$this->view->render();
 	}
-
-	function postResearch(){
-		$this->view->render();
-
-	}
-
-	function downloadResearch(){
-
-	}
-
-	function uploadResearch(){
-
-	}
-
-
-
-
-
-	
 }

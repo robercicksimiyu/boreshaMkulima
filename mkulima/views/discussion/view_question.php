@@ -1,3 +1,8 @@
+<style>
+  div{
+    color: #000;
+  }
+</style>
 <div id="layout">
   <header id="main-nav">
     <nav class="nav nav-primary">
@@ -22,7 +27,7 @@
   <section class="panel col-md-9 col-md-offset-2 header-post" data-role="main" data-zone="thread">
   <div id="posts">
     <ul id="post-list" class="post-list">
-    <?php foreach($questions as $question):?>
+    <?php if($questions): foreach($questions as $question):?>
       <li id="post-1234898982 highlighted-post " class="post ">
           <div data-role="post-content" class="post-content main_question">
 	         	<div class="avatar hovercard">
@@ -281,7 +286,7 @@
   </form>
 </div><!-- /.modal -->
 
-<?php endforeach;?>
+<?php endforeach; else: echo "question unavailable";endif;?>
 </li>
 <?php echo $this->controller->pagination->create_links();?>
 

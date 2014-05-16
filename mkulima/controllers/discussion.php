@@ -3,21 +3,21 @@
 
 class Discussion extends ExtendedController
 {
-	
-
 	function __construct(){
 		parent::__construct();
 		if(!($this->ion_auth->logged_in())){
+			$this->session->set_flashdata('request_failed','To access this service please login first');
 			redirect('discussion_forum');
 		}
 		$this->load->model('discussion_model');
 		$this->load->library('pagination');
 		// $this->output->enable_profiler(TRUE);
-
+		$this->username=$this->session->userdata('username');
 	}
-
+	// Showing all discussions paginated
 	function index(){
 		$questions_number=$this->discussion_model->question_count();
+		// Pagination configurations
 		$config['base_url']=site_url('discussion/index');
 		$config['total_rows']=$questions_number;
 		$config['per_page']=5;
@@ -37,39 +37,29 @@ class Discussion extends ExtendedController
 		$config['prev_link']="&larr; Newer";
 		$config['prev_tag_open']="<li>";
 		$config['prev_config_close']="</li>";
-
+		//initilizing pagination
 		$this->pagination->initialize($config);
 
 		$page=($this->uri->segment(3))?$this->uri->segment(3):0;
 
 		$result=$this->discussion_model->questions($config['per_page'],$page);
-
+		// rendering view
 		$this->view->render(array(
 			'questions'=>$result,
 			'question_number'=>$questions_number));
 	}
-
+	// Asking questions 
 	function askQuestion(){
 		$message=null;
-
 		$this->form_validation->set_rules('search');
 		if($this->form_validation->run()==true){
 			$this->discussion_model->askQuestion($this->input->post('ask_question'));
+			$this->session->set_flashdata('question_success',"Your question has successfully beeen posted");
 			redirect('discussion');
 		}
-
 		$this->view->render();
-
 	}
-
-	function answerQuestion(){
-
-	}
-
-	function stopConversation(){
-
-	}
-
+	//Seaeching for already posted questions 
 	function search(){
 		$result=null;
 		$this->form_validation->set_rules('search', 'Search','required');
@@ -81,18 +71,14 @@ class Discussion extends ExtendedController
 		$this->view->render(array(
 			'results'=>$result));
 	}
-
- 
-
+	// Getting the gravator images for the users who asked and answered questions 
 	function gravator($username){
 		$gravator=$this->discussion_model->gravator($username);
 		foreach ($gravator as $row){
 			return $row->gravator;
-			
 		}
-		
 	}
-
+	//Replying to the question asked
 	function main_question_comment(){
 		$this->form_validation->set_rules('main_post_comment',"Comment",'required');
 		if($this->form_validation->run()==true){
@@ -107,8 +93,7 @@ class Discussion extends ExtendedController
 			redirect('discussion','refresh');
 		}
 	}
-	
-
+	// Comment on the asnwers given
 	function answer_comment(){
 		$this->form_validation->set_rules('answer_comment',"Comment",'required');
 		if($this->form_validation->run()==true){
@@ -120,23 +105,14 @@ class Discussion extends ExtendedController
 			redirect('discussion/view_question/'.$this->input->post('question_id'),'refresh');
 		}
 		else{
-			// redirect('discussion','refresh');
+			redirect('discussion','refresh');
 		}
 	}
-
-
+	// View one specific question
 	function view_question($question_id){
 		$question=$this->discussion_model->view_question($question_id);
-		// var_dump($question);
-		// foreach ($question as $key) {
-		// 	echo $key->posted_by;
-		// }
-		// // $key->posted_by;
-		// exit;
-
 		$this->view->render(array(
 			'questions'=>$question));
-		
 	}
 
 	

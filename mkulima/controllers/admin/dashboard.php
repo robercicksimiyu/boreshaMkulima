@@ -1,6 +1,8 @@
 <?php
 
-
+/*
+Administration Controller
+*/
 class Dashboard extends ExtendedController
 {
 	public function __construct(){
@@ -8,12 +10,12 @@ class Dashboard extends ExtendedController
 		if(!$this->ion_auth->is_admin()){
 			redirect('/','refresh');
 		}
+		// Loading utilities
 		$this->load->model('admin_model');
 		$this->load->library('pagination');
 	}
-
+	//Displaying users pproved and unpapproved
 	function index(){
-		//print_r($this->admin_model->get('users'));
 		$users_number=$this->discussion_model->db->count_all('users');
 		$config['base_url']=site_url('admin/dashboard/index');
 		$config['total_rows']=$users_number;
@@ -76,32 +78,32 @@ class Dashboard extends ExtendedController
 			'authors'=>$this->admin_model->get('editors',$config['per_page'],$page)
 		 	));
 	}
-
+	// Activating users who have signed up
 	public function activate($id){
 		$this->ion_auth->update($id,array('active'=>1,));
 		redirect('admin/dashboard','refresh');
 	}
-
+	// Deleting users who have signed in
 	public function delete_user($id){
 		$this->ion_auth->delete_user($id);
 		redirect('admin/dashboard','refresh');
 	}
-
+	// Blocking users
 	public function block($id){
 		$this->ion_auth->update($id,array('active'=>0,));
 		redirect('admin/dashboard','refresh');
 	}
-
+	// Approving authors who have applied
 	public function approve_author($id){
 		$this->admin_model->approve_author($id);
 		redirect('admin/dashboard/authors','refresh');
 	}
-
+	// Disabling authors
 	public function block_author($id){
 		$this->admin_model->db->update('editors',array('activate'=>0),array('id'=>$id));
 		redirect('admin/dashboard/authors','refresh');
 	}
-
+	// Deleting authors
 	public function delete_author($id){
 		$this->admin_model->db->delete('editors',array('id'=>$id));
 		redirect('admin/dashboard/authors','refresh');

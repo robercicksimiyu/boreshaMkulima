@@ -5,13 +5,17 @@
     background: transparent;
   }
 
-  #alert p{
-    color:#fff;
+  
+
+  .alert-warning{
+    background: #ee0000;
+    color:#000;
+  }
+  .alert.alert-success{
+    color: #33cc66;
   }
 
-  alert{
-    background: #ee0000;
-  }
+
 
   button{
     border-radius: 3px;
@@ -32,9 +36,17 @@
 
     <div class="modal-body">
     <?php if(($message)):?>
-    <div class="alert alert-warning" id="alert">
-      <?=$message?>
-    </div>
+    <div class="alert alert-warning fade in">
+              <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+              <?=$message?>
+      </div>
+    <?php endif;?>
+    <?php if($this->controller->session->flashdata('success')): ?>
+      <div class="alert alert-success fade in">
+              <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+              <?=$this->controller->session->flashdata('success')?>
+      </div>
+      
     <?php endif;?>
     <?php echo form_open('accounts/login',array('class'=>'login'));?>
 
@@ -62,7 +74,9 @@
     
 </div>
     
-
+<script type="text/javascript">
+  $('.alert').alert();
+</script>
 
   
 

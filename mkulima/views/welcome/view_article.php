@@ -17,8 +17,10 @@
 
 </header>
 
-<?php foreach($articles as $key):?>
+<div class="container">
+
 <div class="panel panel-success col-md-9 col-md-offset-2">
+  <?php foreach($articles as $key):?>
 
   <div class="page-header">
     <h1><?php echo $key->title;?></h1>
@@ -48,6 +50,7 @@
       
     </div>
     <?php endforeach;?>
+    <?php endforeach;?>
+</div>
 </div>
 
-<?php endforeach;?>

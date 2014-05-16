@@ -53,6 +53,8 @@
                   <input name="phone" type="text" value="" placeholder="phone number">
                   <input name="password" type="password" placeholder="password">
                   <input name="c_password" type="password" placeholder="Confrim Password">
+                  <p><?=$captcha_img?></p>
+                  <input name="captcha_code" type="text" placeholder="insert code above">
                   
                      
                   <button >Register</button>

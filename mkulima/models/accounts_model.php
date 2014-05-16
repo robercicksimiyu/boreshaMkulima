@@ -19,8 +19,11 @@ class Accounts_Model extends ExtendedModel
 	}
 
 	// getting profile details
-	public function account_setting($id){
-		$oResult=$this->db->query('SELECT username, email, first_name, created_on,last_login,last_name,location,interests,phone,gravator FROM `users` WHERE id=?',array($id));
+	public function account_setting($username){
+		$this->db->limit('1');
+		$oResult=$this->db->get_where('users',array('username'=>$username));
+		// $sql=$this->db->query('SELECT username, email, first_name, created_on,last_login,last_name,location,interests,phone,gravator,fb_link,twitter_link FROM `users` WHERE id=? LIMIT 1',array($id));
+		// $oResult=$this->db->query($sql,array($this->sesssion->userdata('id')));
 		if($oResult->num_rows()){
 			foreach($oResult->row() as $row){
 				$sValue[]=$row;
@@ -32,7 +35,7 @@ class Accounts_Model extends ExtendedModel
 	}
 
 	public function profile($username){
-		$oResult=$this->db->query('SELECT username, email, first_name, created_on,last_login,last_name,location,interests,phone,gravator FROM `users` WHERE username=?',array($username));
+		$oResult=$this->db->query('SELECT username, email, first_name, created_on,last_login,last_name,location,interests,phone,gravator,fb_link,twitter_link  FROM `users` WHERE username=?',array($username));
 		if($oResult->num_rows()){
 			foreach($oResult->result() as $row){
 				$sValue[]=$row;
@@ -104,7 +107,7 @@ class Accounts_Model extends ExtendedModel
 		return $this->db->get_where('discussion_answer_comment',array('username'=>$username))->num_rows();
 	}
 
-	public function upload_profile_pic(){
+	public function upload_profile_pic($field_name){
 		$username=$this->session->userdata('username');
 		$gallery_path='./public/img/account_pics/';
 		$config=array(
@@ -112,8 +115,8 @@ class Accounts_Model extends ExtendedModel
 			'upload_path'=>$gallery_path);
 		$this->load->library('upload',$config);
 
-		if($this->upload->do_upload()){
-			$pic=null;
+		if($this->upload->do_upload($field_name)){
+			$pic=NULL;
 			$prev_pics=$this->db->select('gravator')->get_where('users',array('username'=>$username));
 			foreach($prev_pics->result() as $row){
 				$pic=$row->gravator;
@@ -137,11 +140,13 @@ class Accounts_Model extends ExtendedModel
 				);
 			$this->load->library('image_lib',$config);	
 			$this->image_lib->resize();
+			return true;
 		}else{
-			echo "file din't upload". $this->upload->display_errors();
-			var_dump($config);
-			echo "<img src='".IMG."account_pics/mrembo.png' alt=''>";
-			exit;
+			return false;
+			// echo "file din't upload". $this->upload->display_errors();
+			// var_dump($config);
+			// echo "<img src='".IMG."account_pics/mrembo.png' alt=''>";
+			// exit;
 		}
 		
 	}
